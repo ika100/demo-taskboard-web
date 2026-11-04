@@ -8,7 +8,7 @@ import type { CreateTaskResult, ListTasksResult, NewTask, Task } from "@/app/_li
 
 export type TaskBoardProps = {
   initial: ListTasksResult;
-  createTask: (input: NewTask) => Promise<CreateTaskResult>;
+  createTask(input: NewTask): Promise<CreateTaskResult>;
 };
 
 export function TaskBoard({ initial, createTask }: TaskBoardProps) {
