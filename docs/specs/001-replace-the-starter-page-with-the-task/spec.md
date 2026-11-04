@@ -1,7 +1,7 @@
 ---
 spec_id: 001-replace-the-starter-page-with-the-task
 title: Replace the starter page with the task list and the create-task form
-status: approved
+status: building
 priority: P1
 shape: web-nextjs
 parent: ika100/demo-taskboard-gitops:001-persistent-tasks-and-web-task-list
@@ -150,3 +150,4 @@ As a team member, I want a clear message when tasks cannot be loaded or saved, s
 - 2026-11-04 created
 - 2026-11-04 amended: open question answered; the root page drops the starter content and keeps the site header and footer (AC-001.16)
 - 2026-11-04 approved
+- 2026-11-04 building
