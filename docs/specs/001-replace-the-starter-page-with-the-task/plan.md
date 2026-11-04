@@ -31,6 +31,7 @@ tasks:
     covers: [AC-001.1, AC-001.2, AC-001.5, AC-001.11, AC-001.12, AC-001.13, AC-001.16]
     parallel_safe: false
     depends_on: [t2, t3]
+    done: true
 ---
 
 # Plan — 001 Replace the starter page with the task list and the create-task form
