@@ -24,6 +24,7 @@ tasks:
     covers: [AC-001.6, AC-001.8, AC-001.14]
     parallel_safe: true
     depends_on: [t1]
+    done: true
   - id: t4
     title: Replace the starter root page with the task page
     files: [app/page.tsx, app/_components/feature-card.tsx, app/_components/icons.tsx, app/api/ready/route.ts, tests/page.test.tsx, e2e/home.spec.ts]
