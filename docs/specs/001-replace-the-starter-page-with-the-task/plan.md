@@ -10,6 +10,7 @@ tasks:
     covers: [AC-001.3, AC-001.5, AC-001.6, AC-001.7, AC-001.9, AC-001.10, AC-001.11, AC-001.12, AC-001.14]
     parallel_safe: true
     depends_on: []
+    done: true
   - id: t2
     title: TaskBoard client component (list, form, messages, double-submit guard)
     files: [app/_components/task-board.tsx, app/globals.css]
