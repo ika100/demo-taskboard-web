@@ -129,6 +129,7 @@ As a team member, I want a clear message when tasks cannot be loaded or saved, s
 - **AC-001.13** Given the task API is unavailable, when the web app's readiness endpoint is called, then it still answers `200` `{"status": "ready"}`, so the page stays reachable during an API outage. (system AC-001.13)
 - **AC-001.14** Given `POST /tasks` answers anything other than `201` or a `422` naming `title` (including `422` on `due_date`, `503`, `500`, an unlisted status, a refused connection, or no answer within 5 seconds), when a person submits a valid task, then "The task could not be saved. Please try again." is shown, the entered title and due date stay in the form, nothing is added to the list, and the request is not retried automatically. (system AC-001.14)
 - **AC-001.15** Given the form was submitted and the request has not finished, when the person clicks the submit button again or presses Enter again, then no second request is sent and exactly one task is created; the submit button is disabled while the request is pending and enabled again after the answer, an error or the 5-second timeout. (system AC-001.15)
+- **AC-001.16** Given any state of the task list, when a person opens the web app's root URL, then the page shows the site header and footer and none of the starter content: no "Up and running" hero, no "What's included" section and no "Get started" steps. (system AC-001.6)
 
 ## Non-goals
 
@@ -142,8 +143,9 @@ As a team member, I want a clear message when tasks cannot be loaded or saved, s
 
 ## Open questions
 
-- Confirm: the starter content of the root page (hero, "What's included" cards, "Get started" steps) is removed entirely, and the site header and footer stay. (suggested: yes; affects AC-001.1, AC-001.2)
+- ~~Confirm: the starter content of the root page (hero, "What's included" cards, "Get started" steps) is removed entirely, and the site header and footer stay.~~ Answered: yes, see AC-001.16.
 
 ## Changelog
 
 - 2026-11-04 created
+- 2026-11-04 amended: open question answered; the root page drops the starter content and keeps the site header and footer (AC-001.16)
