@@ -1,38 +1,26 @@
-import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import HomePage from "@/app/page";
 
+afterEach(() => vi.unstubAllGlobals());
+
 describe("HomePage", () => {
-  it("renders the project heading", () => {
-    render(<HomePage />);
-    expect(screen.getByRole("heading", { level: 1, name: "demo-taskboard-web" })).toBeInTheDocument();
-  });
-
-  it("offers the two primary actions", () => {
-    render(<HomePage />);
-    expect(screen.getByRole("link", { name: "Get started" })).toHaveAttribute("href", "#get-started");
-    expect(screen.getByRole("link", { name: "Check health" })).toHaveAttribute("href", "/api/health");
-  });
-
-  it("lists what is included as accessible cards", () => {
-    render(<HomePage />);
-    const features = screen.getByRole("region", { name: "What's included" });
-    const items = within(features).getAllByRole("listitem");
-    expect(items.length).toBeGreaterThanOrEqual(5);
-    expect(within(features).getByRole("heading", { level: 3, name: "Health and readiness" })).toBeInTheDocument();
-    expect(within(features).getByRole("heading", { level: 3, name: "Metrics and tracing" })).toBeInTheDocument();
-  });
-
-  it("explains how to get started in order", () => {
-    render(<HomePage />);
-    const steps = within(screen.getByRole("region", { name: "Get started" })).getAllByRole("listitem");
-    expect(steps).toHaveLength(3);
-  });
-
-  it("keeps a single level-1 heading and ordered sections", () => {
-    render(<HomePage />);
+  it("renders the task page without starter content", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => new Response("[]", { status: 200 })));
+    render(await HomePage());
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent)).toEqual(["What's included", "Get started"]);
+    expect(screen.getByRole("heading", { level: 1, name: "Tasks" })).toBeInTheDocument();
+    expect(screen.getByRole("button")).toBeInTheDocument();
+    for (const text of ["Up and running", "What's included", "Get started", "Check health"]) {
+      expect(screen.queryByText(text)).not.toBeInTheDocument();
+    }
+  });
+
+  it("still renders heading and form when the API fails", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => new Response("x", { status: 500 })));
+    render(await HomePage());
+    expect(screen.getByRole("heading", { level: 1, name: "Tasks" })).toBeInTheDocument();
+    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 });
